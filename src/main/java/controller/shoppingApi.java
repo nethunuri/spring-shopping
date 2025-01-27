@@ -3,15 +3,32 @@ package controller;
 
 
 
+import entity.ContactInfo;
+import entity.Description;
+import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import repository.ContactInfoRepository;
+import repository.DescriptionRepository;
 import repository.ProfileRepository;
+
+import java.util.List;
 
 @RestController
 public class shoppingApi {
     @Autowired
     private ProfileRepository profileRepository;
+
+
+    @Autowired
+    private DescriptionRepository expertiseRepository;
+
+    @Autowired
+    private ContactInfoRepository contactInfoRepository;
+
 
     @GetMapping("/profile")
     public Profile getProfile() {
@@ -27,30 +44,17 @@ public class shoppingApi {
         );
     }
 
-    public static class Profile {
-        private String name;
-        private String about;
-        private String expertise;
-        private String experience;
-        private String hobbies;
-        private String achievements;
-        private String trainings;
-        private String email;
+    @GetMapping("/description")
+    public List<Description> getDescription() {
+        ParseTreePattern descriptionRepository = null;
+        return (Description) descriptionRepository.findAll();
+    }
 
-        // Constructor, getters and setters
-
-        public Profile(String name, String about, String expertise, String experience, String hobbies,
-                       String achievements, String trainings, String email) {
-            this.name = name;
-            this.about = about;
-            this.expertise = expertise;
-            this.experience = experience;
-            this.hobbies = hobbies;
-            this.achievements = achievements;
-            this.trainings = trainings;
-            this.email = email;
-        }
-
-        // Getters and Setters...
+    // POST method for Contact Information
+    @PostMapping("/contact")
+    public ContactInfo addContact(@RequestBody ContactInfo contactInfo) {
+        return (ContactInfo) contactInfoRepository.save(contactInfo);
     }
 }
+
+
