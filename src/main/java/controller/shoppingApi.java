@@ -24,7 +24,7 @@ public class shoppingApi {
 
 
     @Autowired
-    private DescriptionRepository expertiseRepository;
+    private DescriptionRepository descriptionRepository;
 
     @Autowired
     private ContactInfoRepository contactInfoRepository;
@@ -46,8 +46,8 @@ public class shoppingApi {
 
     @GetMapping("/description")
     public List<Description> getDescription() {
-        ParseTreePattern descriptionRepository = null;
-        return (Description) descriptionRepository.findAll();
+        //ParseTreePattern descriptionRepository = null;
+        return descriptionRepository.findAll();
     }
 
     // POST method for Contact Information
